@@ -6,9 +6,13 @@ import {
 }
 
 // Values
+pub fn csv_report(Plan) -> Result[String, PlanError]
+
 pub fn impose(Int, Int) -> Result[Plan, PlanError]
 
 pub fn impose_with(Int, Int, Binding, Duplex) -> Result[Plan, PlanError]
+
+pub fn json_report(Plan) -> Result[String, PlanError]
 
 pub fn layout(Paper, Int) -> Result[Layout, PlanError]
 
