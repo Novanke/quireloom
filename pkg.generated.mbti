@@ -1,0 +1,90 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "Novanke/quireloom"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn validate_config(Int, Int) -> Result[Unit, PlanError]
+
+// Errors
+
+// Types and methods
+pub(all) enum Binding {
+  Left
+  Right
+} derive(Eq, @debug.Debug)
+pub fn Binding::equal(Self, Self) -> Bool
+pub fn Binding::not_equal(Self, Self) -> Bool
+pub fn Binding::to_repr(Self) -> @debug.Repr
+
+pub(all) enum Duplex {
+  LongEdge
+  ShortEdge
+} derive(Eq, @debug.Debug)
+pub fn Duplex::equal(Self, Self) -> Bool
+pub fn Duplex::not_equal(Self, Self) -> Bool
+pub fn Duplex::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Face {
+  left : Slot
+  right : Slot
+  rotation : Int
+} derive(Eq, @debug.Debug)
+pub fn Face::equal(Self, Self) -> Bool
+pub fn Face::not_equal(Self, Self) -> Bool
+pub fn Face::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Plan {
+  page_count : Int
+  signature_pages : Int
+  binding : Binding
+  duplex : Duplex
+  sheets : Array[Sheet]
+} derive(Eq, @debug.Debug)
+pub fn Plan::equal(Self, Self) -> Bool
+pub fn Plan::not_equal(Self, Self) -> Bool
+pub fn Plan::to_repr(Self) -> @debug.Repr
+
+pub(all) enum PlanError {
+  PageCount
+  SignatureSize
+  Geometry
+  CorruptPlan(String)
+} derive(Eq, @debug.Debug)
+pub fn PlanError::equal(Self, Self) -> Bool
+pub fn PlanError::not_equal(Self, Self) -> Bool
+pub fn PlanError::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Sheet {
+  signature : Int
+  depth : Int
+  front : Face
+  back : Face
+} derive(Eq, @debug.Debug)
+pub fn Sheet::equal(Self, Self) -> Bool
+pub fn Sheet::not_equal(Self, Self) -> Bool
+pub fn Sheet::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Signature {
+  index : Int
+  start : Int
+  pages : Int
+  real_pages : Int
+} derive(Eq, @debug.Debug)
+pub fn Signature::equal(Self, Self) -> Bool
+pub fn Signature::not_equal(Self, Self) -> Bool
+pub fn Signature::to_repr(Self) -> @debug.Repr
+
+pub(all) enum Slot {
+  Page(Int)
+  Blank
+} derive(Eq, @debug.Debug)
+pub fn Slot::equal(Self, Self) -> Bool
+pub fn Slot::not_equal(Self, Self) -> Bool
+pub fn Slot::to_repr(Self) -> @debug.Repr
+
+// Type aliases
+
+// Traits
