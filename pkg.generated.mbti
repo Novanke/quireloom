@@ -8,6 +8,8 @@ import {
 // Values
 pub fn impose(Int, Int) -> Result[Plan, PlanError]
 
+pub fn impose_with(Int, Int, Binding, Duplex) -> Result[Plan, PlanError]
+
 pub fn signatures(Int, Int) -> Result[Array[Signature], PlanError]
 
 pub fn validate_config(Int, Int) -> Result[Unit, PlanError]
