@@ -10,6 +10,8 @@ pub fn impose(Int, Int) -> Result[Plan, PlanError]
 
 pub fn impose_with(Int, Int, Binding, Duplex) -> Result[Plan, PlanError]
 
+pub fn layout(Paper, Int) -> Result[Layout, PlanError]
+
 pub fn recover(Plan) -> Result[Array[Slot], PlanError]
 
 pub fn signatures(Int, Int) -> Result[Array[Signature], PlanError]
@@ -46,6 +48,25 @@ pub fn Face::equal(Self, Self) -> Bool
 pub fn Face::not_equal(Self, Self) -> Bool
 pub fn Face::to_repr(Self) -> @debug.Repr
 
+pub(all) struct Layout {
+  left : Rect
+  right : Rect
+} derive(Eq, @debug.Debug)
+pub fn Layout::equal(Self, Self) -> Bool
+pub fn Layout::not_equal(Self, Self) -> Bool
+pub fn Layout::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Paper {
+  width : Int
+  height : Int
+  margin : Int
+  gutter : Int
+  creep : Int
+} derive(Eq, @debug.Debug)
+pub fn Paper::equal(Self, Self) -> Bool
+pub fn Paper::not_equal(Self, Self) -> Bool
+pub fn Paper::to_repr(Self) -> @debug.Repr
+
 pub(all) struct Plan {
   page_count : Int
   signature_pages : Int
@@ -66,6 +87,16 @@ pub(all) enum PlanError {
 pub fn PlanError::equal(Self, Self) -> Bool
 pub fn PlanError::not_equal(Self, Self) -> Bool
 pub fn PlanError::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Rect {
+  x : Int
+  y : Int
+  width : Int
+  height : Int
+} derive(Eq, @debug.Debug)
+pub fn Rect::equal(Self, Self) -> Bool
+pub fn Rect::not_equal(Self, Self) -> Bool
+pub fn Rect::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Sheet {
   signature : Int
