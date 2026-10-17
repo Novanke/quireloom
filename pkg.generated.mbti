@@ -20,6 +20,8 @@ pub fn recover(Plan) -> Result[Array[Slot], PlanError]
 
 pub fn signatures(Int, Int) -> Result[Array[Signature], PlanError]
 
+pub fn svg_proof(Plan, Paper, Int, Bool) -> Result[String, PlanError]
+
 pub fn validate_config(Int, Int) -> Result[Unit, PlanError]
 
 pub fn verify(Plan) -> Result[Unit, PlanError]
