@@ -51,3 +51,20 @@ You can browse and install extra skills here:
   scientific computations), prefer assertion tests. You can use
   `moon coverage analyze > uncovered.log` to see which parts of your code are
   not covered by tests.
+
+## Required release workflow
+
+The project owner requires every completed project update intended for the
+competition's final review to be published to mooncakes.io. A GitHub push alone
+does not complete delivery. Follow `docs/releasing.md`.
+
+- Run the appropriate checks, tests, builds and examples before publication.
+- Increment the semantic version for each update to an already published version;
+  never attempt to replace an existing registry version.
+- Inspect `moon package --list`; never publish identity documents, the entrant's
+  proposal, private contact or bank details, credentials, or local scratch files.
+- Push the release commit, publish that module version, and verify installation
+  and a public API call in a fresh consumer outside this repository.
+- Report the exact module version and registry URL. If authentication or registry
+  availability blocks publication, explicitly report the release as incomplete.
+- Keep publication credentials out of Git, logs, package archives and chat.
