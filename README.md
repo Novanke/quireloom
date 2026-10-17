@@ -31,9 +31,14 @@ SVG calibration sheet. These are runnable examples, not an argument-driven CLI.
 
 ## Library use
 
-Add `"Novanke/quireloom" @quire` to a local consumer's `moon.pkg` imports.
-The package is **not yet published to Mooncakes**; clone it and use a workspace
-for local integration until a registry release is confirmed.
+Install the 0.1.0 release from Mooncakes in your consumer module:
+
+```sh
+moon add Novanke/quireloom@0.1.0
+```
+
+Add `"Novanke/quireloom" @quire` to the consumer package's `moon.pkg` imports.
+See the [registry documentation](https://mooncakes.io/docs/Novanke/quireloom@0.1.0).
 
 ```moonbit
 let plan = @quire.impose_with(19, 16, Left, ShortEdge).unwrap()
@@ -71,6 +76,8 @@ production press certification, competition acceptance or complete historical
 novelty verification.
 
 Before the October 31 deadline: obtain the complete historical project list,
-confirm the scope with the organizer, run a physical folded proof, polish the
-public API and publish a verified Mooncakes release. The entrant writes the
+confirm the scope with the organizer, run a physical folded proof and polish the
+public API. Every completed update intended for final review must also be
+published to Mooncakes; see [the release procedure](docs/releasing.md).
+The entrant writes the
 competition proposal personally and completes identity and consent fields.
