@@ -1,0 +1,25 @@
+name: Verify booklet plans
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install official MoonBit toolchain
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash -s -- 0.1.20261012+943464bfa
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      - name: Check, test, build and run demonstrations
+        run: |
+          moon version --all
+          moon fmt --check
+          moon info
+          git diff --exit-code -- '*.mbti'
+          for target in wasm-gc js; do
+            moon check --target "$target" --deny-warn
+            moon test --target "$target" --deny-warn
+            moon build --target "$target" --deny-warn
+            moon run --target "$target" cmd/main
+          done
