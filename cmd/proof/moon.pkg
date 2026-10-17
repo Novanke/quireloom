@@ -1,0 +1,5 @@
+import {
+  "Novanke/quireloom" @lib,
+}
+
+pkgtype(kind: "executable")
