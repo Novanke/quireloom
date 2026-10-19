@@ -8,6 +8,8 @@ import {
 // Values
 pub fn assemble_document(Array[Section]) -> Result[Document, WorkflowError]
 
+pub fn build_job(JobSpec) -> Result[PrintJob, WorkflowError]
+
 pub fn csv_report(Plan) -> Result[String, PlanError]
 
 pub fn explicit_gatherings(Int, Array[Int]) -> Result[Array[Signature], WorkflowError]
@@ -23,6 +25,8 @@ pub fn json_report(Plan) -> Result[String, PlanError]
 pub fn layout(Paper, Int) -> Result[Layout, PlanError]
 
 pub fn locate_source(Booklet, String, Int) -> Result[Array[Placement], WorkflowError]
+
+pub fn parse_job(String) -> Result[JobSpec, WorkflowError]
 
 pub fn parse_selection(String, Int) -> Result[Array[Slot], WorkflowError]
 
@@ -115,6 +119,17 @@ pub(all) struct Impression {
   back : Bool
 }
 
+pub(all) struct JobSpec {
+  sections : Array[Section]
+  maximum : Int
+  policy : SignaturePolicy
+  capacities : Array[Int]?
+  binding : Binding
+  duplex : Duplex
+  paper : Paper
+  print : PrintOptions
+}
+
 pub(all) struct Layout {
   left : Rect
   right : Rect
@@ -178,6 +193,12 @@ pub(all) struct PreflightIssue {
   blocking : Bool
   field : String
   message : String
+}
+
+pub(all) struct PrintJob {
+  booklet : Booklet
+  paper : Paper
+  schedule : PrintSchedule
 }
 
 pub(all) enum PrintMode {
