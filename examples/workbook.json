@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "sections": [
+    {"source": "cover", "source_pages": 2, "selection": "1", "start_on_recto": false},
+    {"source": "workbook", "source_pages": 17, "selection": "1-17", "start_on_recto": true},
+    {"source": "cover", "source_pages": 2, "selection": "2", "start_on_recto": false}
+  ],
+  "maximum": 16,
+  "policy": "balanced",
+  "binding": "left",
+  "duplex": "short-edge",
+  "paper": {"width": 297, "height": 210, "margin": 10, "gutter": 8, "creep": 1},
+  "print": {"copies": 2, "mode": "manual", "back_stack": "reversed", "collation": "collated"}
+}

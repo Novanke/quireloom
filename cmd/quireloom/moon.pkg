@@ -1,0 +1,6 @@
+import {
+  "Novanke/quireloom" @lib,
+  "moonbitlang/core/env",
+}
+
+pkgtype(kind: "executable")

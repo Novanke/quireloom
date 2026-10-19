@@ -10,6 +10,8 @@ pub fn assemble_document(Array[Section]) -> Result[Document, WorkflowError]
 
 pub fn build_job(JobSpec) -> Result[PrintJob, WorkflowError]
 
+pub fn command_help() -> String
+
 pub fn csv_report(Plan) -> Result[String, PlanError]
 
 pub fn explicit_gatherings(Int, Array[Int]) -> Result[Array[Signature], WorkflowError]
@@ -47,6 +49,8 @@ pub fn proof_atlas(PrintJob, Int, Int) -> Result[String, WorkflowError]
 pub fn recover(Plan) -> Result[Array[Slot], PlanError]
 
 pub fn recover_booklet(Booklet) -> Result[Array[ContentPage], WorkflowError]
+
+pub fn run_command(Array[String]) -> Result[String, WorkflowError]
 
 pub fn schedule_print(Booklet, PrintOptions) -> Result[PrintSchedule, WorkflowError]
 
