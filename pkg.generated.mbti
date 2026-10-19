@@ -16,6 +16,8 @@ pub fn json_report(Plan) -> Result[String, PlanError]
 
 pub fn layout(Paper, Int) -> Result[Layout, PlanError]
 
+pub fn parse_selection(String, Int) -> Result[Array[Slot], WorkflowError]
+
 pub fn recover(Plan) -> Result[Array[Slot], PlanError]
 
 pub fn signatures(Int, Int) -> Result[Array[Signature], PlanError]
@@ -131,6 +133,14 @@ pub(all) enum Slot {
 pub fn Slot::equal(Self, Self) -> Bool
 pub fn Slot::not_equal(Self, Self) -> Bool
 pub fn Slot::to_repr(Self) -> @debug.Repr
+
+pub(all) struct WorkflowError {
+  field : String
+  message : String
+} derive(Eq, @debug.Debug)
+pub fn WorkflowError::equal(Self, Self) -> Bool
+pub fn WorkflowError::not_equal(Self, Self) -> Bool
+pub fn WorkflowError::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 
