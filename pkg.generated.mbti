@@ -10,6 +10,8 @@ pub fn assemble_document(Array[Section]) -> Result[Document, WorkflowError]
 
 pub fn csv_report(Plan) -> Result[String, PlanError]
 
+pub fn explicit_gatherings(Int, Array[Int]) -> Result[Array[Signature], WorkflowError]
+
 pub fn impose(Int, Int) -> Result[Plan, PlanError]
 
 pub fn impose_with(Int, Int, Binding, Duplex) -> Result[Plan, PlanError]
@@ -20,6 +22,8 @@ pub fn layout(Paper, Int) -> Result[Layout, PlanError]
 
 pub fn parse_selection(String, Int) -> Result[Array[Slot], WorkflowError]
 
+pub fn plan_gatherings(Int, Int, SignaturePolicy) -> Result[Array[Signature], WorkflowError]
+
 pub fn recover(Plan) -> Result[Array[Slot], PlanError]
 
 pub fn signatures(Int, Int) -> Result[Array[Signature], PlanError]
@@ -29,6 +33,8 @@ pub fn svg_proof(Plan, Paper, Int, Bool) -> Result[String, PlanError]
 pub fn validate_config(Int, Int) -> Result[Unit, PlanError]
 
 pub fn validate_document(Document) -> Result[Unit, WorkflowError]
+
+pub fn validate_gatherings(Int, Array[Signature]) -> Result[Unit, WorkflowError]
 
 pub fn verify(Plan) -> Result[Unit, PlanError]
 
@@ -155,6 +161,11 @@ pub(all) struct Signature {
 pub fn Signature::equal(Self, Self) -> Bool
 pub fn Signature::not_equal(Self, Self) -> Bool
 pub fn Signature::to_repr(Self) -> @debug.Repr
+
+pub(all) enum SignaturePolicy {
+  Fill
+  Balanced
+}
 
 pub(all) enum Slot {
   Page(Int)
