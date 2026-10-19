@@ -83,7 +83,7 @@ Supports once-folded, nested two-up booklets, 1–100,000 pages and gathering si
 multi-fold signatures or colour-management implementation is claimed.
 See [printing semantics](docs/semantics.md) for driver calibration and geometry.
 
-Local verification used moon 0.1.20261012 and moonc v0.10.15+943464bfa on Windows.
+Local verification used moon 0.1.20261016 and moonc v0.10.16+b1a0e846e on Windows.
 28 tests pass on each of wasm-gc and js. Separate test blocks enumerate 2048
 legacy configurations and 8192 generalized configurations; those are cases inside
 test blocks. Hand-worked print passes, provenance corruption, JSON/CSV/XML

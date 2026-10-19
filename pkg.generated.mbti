@@ -14,37 +14,37 @@ pub fn command_help() -> String
 
 pub fn csv_report(Plan) -> Result[String, PlanError]
 
-pub fn explicit_gatherings(Int, Array[Int]) -> Result[Array[Signature], WorkflowError]
+pub fn explicit_gatherings(Int32, Array[Int32]) -> Result[Array[Signature], WorkflowError]
 
-pub fn impose(Int, Int) -> Result[Plan, PlanError]
+pub fn impose(Int32, Int32) -> Result[Plan, PlanError]
 
 pub fn impose_document(Document, Array[Signature], Binding, Duplex) -> Result[Booklet, WorkflowError]
 
-pub fn impose_with(Int, Int, Binding, Duplex) -> Result[Plan, PlanError]
+pub fn impose_with(Int32, Int32, Binding, Duplex) -> Result[Plan, PlanError]
 
 pub fn job_csv(PrintJob) -> Result[String, WorkflowError]
 
 pub fn job_manifest(PrintJob) -> Result[String, WorkflowError]
 
-pub fn job_proof(PrintJob, Int, Bool) -> Result[String, WorkflowError]
+pub fn job_proof(PrintJob, Int32, Bool) -> Result[String, WorkflowError]
 
 pub fn job_spec_json(JobSpec) -> Result[String, WorkflowError]
 
 pub fn json_report(Plan) -> Result[String, PlanError]
 
-pub fn layout(Paper, Int) -> Result[Layout, PlanError]
+pub fn layout(Paper, Int32) -> Result[Layout, PlanError]
 
-pub fn locate_source(Booklet, String, Int) -> Result[Array[Placement], WorkflowError]
+pub fn locate_source(Booklet, String, Int32) -> Result[Array[Placement], WorkflowError]
 
 pub fn parse_job(String) -> Result[JobSpec, WorkflowError]
 
-pub fn parse_selection(String, Int) -> Result[Array[Slot], WorkflowError]
+pub fn parse_selection(String, Int32) -> Result[Array[Slot], WorkflowError]
 
-pub fn plan_gatherings(Int, Int, SignaturePolicy) -> Result[Array[Signature], WorkflowError]
+pub fn plan_gatherings(Int32, Int32, SignaturePolicy) -> Result[Array[Signature], WorkflowError]
 
 pub fn preflight(Booklet, Paper) -> Result[Preflight, WorkflowError]
 
-pub fn proof_atlas(PrintJob, Int, Int) -> Result[String, WorkflowError]
+pub fn proof_atlas(PrintJob, Int32, Int32) -> Result[String, WorkflowError]
 
 pub fn recover(Plan) -> Result[Array[Slot], PlanError]
 
@@ -54,15 +54,15 @@ pub fn run_command(Array[String]) -> Result[String, WorkflowError]
 
 pub fn schedule_print(Booklet, PrintOptions) -> Result[PrintSchedule, WorkflowError]
 
-pub fn signatures(Int, Int) -> Result[Array[Signature], PlanError]
+pub fn signatures(Int32, Int32) -> Result[Array[Signature], PlanError]
 
-pub fn svg_proof(Plan, Paper, Int, Bool) -> Result[String, PlanError]
+pub fn svg_proof(Plan, Paper, Int32, Bool) -> Result[String, PlanError]
 
-pub fn validate_config(Int, Int) -> Result[Unit, PlanError]
+pub fn validate_config(Int32, Int32) -> Result[Unit, PlanError]
 
 pub fn validate_document(Document) -> Result[Unit, WorkflowError]
 
-pub fn validate_gatherings(Int, Array[Signature]) -> Result[Unit, WorkflowError]
+pub fn validate_gatherings(Int32, Array[Signature]) -> Result[Unit, WorkflowError]
 
 pub fn verify(Plan) -> Result[Unit, PlanError]
 
@@ -98,7 +98,7 @@ pub(all) enum Collation {
 }
 
 pub(all) enum ContentPage {
-  Source(String, Int)
+  Source(String, Int32)
   Empty
 } derive(Eq, @debug.Debug)
 pub fn ContentPage::equal(Self, Self) -> Bool
@@ -121,23 +121,23 @@ pub fn Duplex::to_repr(Self) -> @debug.Repr
 pub(all) struct Face {
   left : Slot
   right : Slot
-  rotation : Int
+  rotation : Int32
 } derive(Eq, @debug.Debug)
 pub fn Face::equal(Self, Self) -> Bool
 pub fn Face::not_equal(Self, Self) -> Bool
 pub fn Face::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Impression {
-  copy : Int
-  sheet : Int
+  copy : Int32
+  sheet : Int32
   back : Bool
 }
 
 pub(all) struct JobSpec {
   sections : Array[Section]
-  maximum : Int
+  maximum : Int32
   policy : SignaturePolicy
-  capacities : Array[Int]?
+  capacities : Array[Int32]?
   binding : Binding
   duplex : Duplex
   paper : Paper
@@ -153,27 +153,27 @@ pub fn Layout::not_equal(Self, Self) -> Bool
 pub fn Layout::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Paper {
-  width : Int
-  height : Int
-  margin : Int
-  gutter : Int
-  creep : Int
+  width : Int32
+  height : Int32
+  margin : Int32
+  gutter : Int32
+  creep : Int32
 } derive(Eq, @debug.Debug)
 pub fn Paper::equal(Self, Self) -> Bool
 pub fn Paper::not_equal(Self, Self) -> Bool
 pub fn Paper::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Placement {
-  logical_page : Int
-  sheet : Int
+  logical_page : Int32
+  sheet : Int32
   back : Bool
   right : Bool
-  rotation : Int
+  rotation : Int32
 }
 
 pub(all) struct Plan {
-  page_count : Int
-  signature_pages : Int
+  page_count : Int32
+  signature_pages : Int32
   binding : Binding
   duplex : Duplex
   sheets : Array[Sheet]
@@ -193,13 +193,13 @@ pub fn PlanError::not_equal(Self, Self) -> Bool
 pub fn PlanError::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Preflight {
-  logical_pages : Int
-  content_pages : Int
-  explicit_blanks : Int
-  padding_blanks : Int
-  sheets : Int
-  gatherings : Int
-  repeated_references : Int
+  logical_pages : Int32
+  content_pages : Int32
+  explicit_blanks : Int32
+  padding_blanks : Int32
+  sheets : Int32
+  gatherings : Int32
+  repeated_references : Int32
   issues : Array[PreflightIssue]
 }
 
@@ -221,7 +221,7 @@ pub(all) enum PrintMode {
 }
 
 pub(all) struct PrintOptions {
-  copies : Int
+  copies : Int32
   reverse_sheets : Bool
   collation : Collation
   mode : PrintMode
@@ -238,10 +238,10 @@ pub(all) struct PrintSchedule {
 }
 
 pub(all) struct Rect {
-  x : Int
-  y : Int
-  width : Int
-  height : Int
+  x : Int32
+  y : Int32
+  width : Int32
+  height : Int32
 } derive(Eq, @debug.Debug)
 pub fn Rect::equal(Self, Self) -> Bool
 pub fn Rect::not_equal(Self, Self) -> Bool
@@ -249,20 +249,20 @@ pub fn Rect::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Section {
   source : String
-  source_pages : Int
+  source_pages : Int32
   selection : String
   start_on_recto : Bool
 }
 
 pub(all) struct SectionSpan {
   source : String
-  first : Int
-  count : Int
+  first : Int32
+  count : Int32
 }
 
 pub(all) struct Sheet {
-  signature : Int
-  depth : Int
+  signature : Int32
+  depth : Int32
   front : Face
   back : Face
 } derive(Eq, @debug.Debug)
@@ -271,10 +271,10 @@ pub fn Sheet::not_equal(Self, Self) -> Bool
 pub fn Sheet::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Signature {
-  index : Int
-  start : Int
-  pages : Int
-  real_pages : Int
+  index : Int32
+  start : Int32
+  pages : Int32
+  real_pages : Int32
 } derive(Eq, @debug.Debug)
 pub fn Signature::equal(Self, Self) -> Bool
 pub fn Signature::not_equal(Self, Self) -> Bool
@@ -286,7 +286,7 @@ pub(all) enum SignaturePolicy {
 }
 
 pub(all) enum Slot {
-  Page(Int)
+  Page(Int32)
   Blank
 } derive(Eq, @debug.Debug)
 pub fn Slot::equal(Self, Self) -> Bool
