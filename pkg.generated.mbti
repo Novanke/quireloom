@@ -30,6 +30,8 @@ pub fn recover(Plan) -> Result[Array[Slot], PlanError]
 
 pub fn recover_booklet(Booklet) -> Result[Array[ContentPage], WorkflowError]
 
+pub fn schedule_print(Booklet, PrintOptions) -> Result[PrintSchedule, WorkflowError]
+
 pub fn signatures(Int, Int) -> Result[Array[Signature], PlanError]
 
 pub fn svg_proof(Plan, Paper, Int, Bool) -> Result[String, PlanError]
@@ -45,6 +47,11 @@ pub fn verify(Plan) -> Result[Unit, PlanError]
 // Errors
 
 // Types and methods
+pub(all) enum BackStack {
+  SameOrder
+  Reversed
+}
+
 pub(all) enum Binding {
   Left
   Right
@@ -59,6 +66,11 @@ pub(all) struct Booklet {
   sheets : Array[Sheet]
   binding : Binding
   duplex : Duplex
+}
+
+pub(all) enum Collation {
+  Collated
+  Uncollated
 }
 
 pub(all) enum ContentPage {
@@ -90,6 +102,12 @@ pub(all) struct Face {
 pub fn Face::equal(Self, Self) -> Bool
 pub fn Face::not_equal(Self, Self) -> Bool
 pub fn Face::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Impression {
+  copy : Int
+  sheet : Int
+  back : Bool
+}
 
 pub(all) struct Layout {
   left : Rect
@@ -130,6 +148,28 @@ pub(all) enum PlanError {
 pub fn PlanError::equal(Self, Self) -> Bool
 pub fn PlanError::not_equal(Self, Self) -> Bool
 pub fn PlanError::to_repr(Self) -> @debug.Repr
+
+pub(all) enum PrintMode {
+  Automatic
+  Manual(BackStack)
+}
+
+pub(all) struct PrintOptions {
+  copies : Int
+  reverse_sheets : Bool
+  collation : Collation
+  mode : PrintMode
+}
+
+pub(all) struct PrintPass {
+  reload : Bool
+  impressions : Array[Impression]
+}
+
+pub(all) struct PrintSchedule {
+  options : PrintOptions
+  passes : Array[PrintPass]
+}
 
 pub(all) struct Rect {
   x : Int
