@@ -22,9 +22,13 @@ pub fn json_report(Plan) -> Result[String, PlanError]
 
 pub fn layout(Paper, Int) -> Result[Layout, PlanError]
 
+pub fn locate_source(Booklet, String, Int) -> Result[Array[Placement], WorkflowError]
+
 pub fn parse_selection(String, Int) -> Result[Array[Slot], WorkflowError]
 
 pub fn plan_gatherings(Int, Int, SignaturePolicy) -> Result[Array[Signature], WorkflowError]
+
+pub fn preflight(Booklet, Paper) -> Result[Preflight, WorkflowError]
 
 pub fn recover(Plan) -> Result[Array[Slot], PlanError]
 
@@ -130,6 +134,14 @@ pub fn Paper::equal(Self, Self) -> Bool
 pub fn Paper::not_equal(Self, Self) -> Bool
 pub fn Paper::to_repr(Self) -> @debug.Repr
 
+pub(all) struct Placement {
+  logical_page : Int
+  sheet : Int
+  back : Bool
+  right : Bool
+  rotation : Int
+}
+
 pub(all) struct Plan {
   page_count : Int
   signature_pages : Int
@@ -150,6 +162,23 @@ pub(all) enum PlanError {
 pub fn PlanError::equal(Self, Self) -> Bool
 pub fn PlanError::not_equal(Self, Self) -> Bool
 pub fn PlanError::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Preflight {
+  logical_pages : Int
+  content_pages : Int
+  explicit_blanks : Int
+  padding_blanks : Int
+  sheets : Int
+  gatherings : Int
+  repeated_references : Int
+  issues : Array[PreflightIssue]
+}
+
+pub(all) struct PreflightIssue {
+  blocking : Bool
+  field : String
+  message : String
+}
 
 pub(all) enum PrintMode {
   Automatic
