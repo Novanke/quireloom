@@ -119,7 +119,22 @@ pub fn validate_document(document : Document) -> Result[Unit, WorkflowError] {
     }
   }
   let mut previous_end = 0
+  if document.sections.length() > 1000 {
+    return Err(
+      workflow_error(
+        "document.sections", "at most 1000 section spans are allowed",
+      ),
+    )
+  }
   for index, span in document.sections {
+    if span.source.is_blank() || span.source.length() > 128 {
+      return Err(
+        workflow_error(
+          "document.sections[\{index}].source",
+          "invalid source identifier",
+        ),
+      )
+    }
     if span.first <= previous_end ||
       span.count < 1 ||
       span.count > document.pages.length() ||
@@ -131,7 +146,38 @@ pub fn validate_document(document : Document) -> Result[Unit, WorkflowError] {
         ),
       )
     }
+    for gap in previous_end..<(span.first - 1) {
+      if document.pages[gap] != Empty {
+        return Err(
+          workflow_error(
+            "document.sections[\{index}]",
+            "unclaimed content before section",
+          ),
+        )
+      }
+    }
+    for position in (span.first - 1)..<(span.first - 1 + span.count) {
+      match document.pages[position] {
+        Source(source, _) if source != span.source =>
+          return Err(
+            workflow_error(
+              "document.sections[\{index}]",
+              "source does not match section provenance",
+            ),
+          )
+        _ => ()
+      }
+    }
     previous_end = span.first + span.count - 1
+  }
+  if !document.sections.is_empty() {
+    for position in previous_end..<document.pages.length() {
+      if document.pages[position] != Empty {
+        return Err(
+          workflow_error("document.sections", "unclaimed trailing content"),
+        )
+      }
+    }
   }
   Ok(())
 }

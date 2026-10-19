@@ -96,6 +96,9 @@ pub fn validate_gatherings(
   pages : Int32,
   groups : Array[Signature],
 ) -> Result[Unit, WorkflowError] {
+  if groups.is_empty() || groups.length() > 25000 {
+    return Err(workflow_error("gatherings", "expected 1..25000 gatherings"))
+  }
   let expected = match
     explicit_gatherings(pages, groups.map(fn(g) { g.pages })) {
     Err(e) => return Err(e)
