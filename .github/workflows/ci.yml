@@ -22,4 +22,14 @@ jobs:
             moon test --target "$target" --deny-warn
             moon build --target "$target" --deny-warn
             moon run --target "$target" cmd/main
+            job="$(cat examples/workbook.json)"
+            moon run --target "$target" cmd/quireloom -- --job "$job" --format manifest > "$RUNNER_TEMP/quireloom-$target.json"
+            moon run --target "$target" cmd/quireloom -- --job "$job" --format csv > "$RUNNER_TEMP/quireloom-$target.csv"
+            moon run --target "$target" cmd/quireloom -- --job "$job" --format atlas --count 5 > "$RUNNER_TEMP/quireloom-$target.svg"
           done
+          cmp "$RUNNER_TEMP/quireloom-wasm-gc.json" "$RUNNER_TEMP/quireloom-js.json"
+          cmp "$RUNNER_TEMP/quireloom-wasm-gc.csv" "$RUNNER_TEMP/quireloom-js.csv"
+          cmp "$RUNNER_TEMP/quireloom-wasm-gc.svg" "$RUNNER_TEMP/quireloom-js.svg"
+      - name: Report library source separately from tests and documents
+        shell: pwsh
+        run: ./scripts/source-audit.ps1

@@ -13,6 +13,7 @@ test "source-labelled proof escapes XML and paginates front back pairs" {
     ],
   }).unwrap()
   let svg = proof_atlas(job, 0, 2).unwrap()
+  assert_true(svg.contains("fill=\"#e9eeea\""))
   assert_true(svg.contains("&lt;script&gt;&amp;&quot;书"))
   assert_true(!svg.contains("<script>"))
   assert_true(svg.contains("Sheet 2 / gathering 1 / depth 1 / BACK"))

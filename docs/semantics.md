@@ -1,5 +1,9 @@
 # Printing model
 
+This first section describes the sequential `Plan` API retained from 0.1.0.
+The 0.2.0 `Booklet`/`PrintJob` API generalizes source mapping and gathering sizes;
+see the additional section below and [the job format](job-format.md).
+
 An input is a sequential book of 1–100,000 logical pages. A gathering (signature)
 contains at most 4–128 pages, in multiples of four. Only the final gathering is
 padded, to the next multiple of four. Each sheet folds once down the centre;
@@ -27,3 +31,23 @@ inward shift per nesting depth. Overlapping or clipped layouts are rejected.
 SVG output contains page-number placeholders and a fold line. The library does
 not parse PDFs, render fonts, rearrange source artwork, control printers, handle
 multi-fold signatures or promise press-ready colour management.
+
+## Assembled documents and print jobs
+
+A `Document` assigns logical positions to source identifiers/page numbers or
+authored blanks. Source references may repeat; logical positions never do.
+Section spans, when present, must account for source content without overlaps or
+false provenance. Recto alignment inserts an authored blank before a section.
+
+Gathering plans may fill to a maximum, balance whole sheets or follow explicit
+mixed capacities. Only the final gathering may have up to three padding slots.
+`recover_booklet` reconstructs and checks every logical position from supplied
+faces before resolving it through the source map. Authored blanks and padding
+therefore remain distinguishable in reports even though both contain no artwork.
+
+Print schedules refer to physical `(copy, sheet)` pairs. Automatic schedules
+interleave front and back for each pair. Manual schedules put all fronts in pass
+one and matching backs in pass two; `back_stack` specifies the calibrated stack
+permutation across the entire first pass, including copy boundaries.
+`verify_schedule` independently checks coverage, uniqueness, side pairing,
+reload markers, collation and that permutation. It cannot observe the printer.

@@ -139,6 +139,6 @@ pub fn proof_atlas(
     }
   }
   Ok(
-    "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"\{width}mm\" height=\"\{height}mm\" viewBox=\"0 0 \{width} \{height}\"><title>QuireLoom source-labelled proof atlas</title>\{fragments.join("")}</svg>",
+    "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"\{width}mm\" height=\"\{height}mm\" viewBox=\"0 0 \{width} \{height}\"><title>QuireLoom source-labelled proof atlas</title><rect width=\"100%\" height=\"100%\" fill=\"#e9eeea\"/>\{fragments.join("")}</svg>",
   )
 }
