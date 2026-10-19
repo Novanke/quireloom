@@ -24,6 +24,8 @@ pub fn job_csv(PrintJob) -> Result[String, WorkflowError]
 
 pub fn job_manifest(PrintJob) -> Result[String, WorkflowError]
 
+pub fn job_proof(PrintJob, Int, Bool) -> Result[String, WorkflowError]
+
 pub fn job_spec_json(JobSpec) -> Result[String, WorkflowError]
 
 pub fn json_report(Plan) -> Result[String, PlanError]
@@ -39,6 +41,8 @@ pub fn parse_selection(String, Int) -> Result[Array[Slot], WorkflowError]
 pub fn plan_gatherings(Int, Int, SignaturePolicy) -> Result[Array[Signature], WorkflowError]
 
 pub fn preflight(Booklet, Paper) -> Result[Preflight, WorkflowError]
+
+pub fn proof_atlas(PrintJob, Int, Int) -> Result[String, WorkflowError]
 
 pub fn recover(Plan) -> Result[Array[Slot], PlanError]
 
