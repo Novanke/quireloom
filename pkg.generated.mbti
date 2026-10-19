@@ -6,6 +6,8 @@ import {
 }
 
 // Values
+pub fn assemble_document(Array[Section]) -> Result[Document, WorkflowError]
+
 pub fn csv_report(Plan) -> Result[String, PlanError]
 
 pub fn impose(Int, Int) -> Result[Plan, PlanError]
@@ -26,6 +28,8 @@ pub fn svg_proof(Plan, Paper, Int, Bool) -> Result[String, PlanError]
 
 pub fn validate_config(Int, Int) -> Result[Unit, PlanError]
 
+pub fn validate_document(Document) -> Result[Unit, WorkflowError]
+
 pub fn verify(Plan) -> Result[Unit, PlanError]
 
 // Errors
@@ -38,6 +42,19 @@ pub(all) enum Binding {
 pub fn Binding::equal(Self, Self) -> Bool
 pub fn Binding::not_equal(Self, Self) -> Bool
 pub fn Binding::to_repr(Self) -> @debug.Repr
+
+pub(all) enum ContentPage {
+  Source(String, Int)
+  Empty
+} derive(Eq, @debug.Debug)
+pub fn ContentPage::equal(Self, Self) -> Bool
+pub fn ContentPage::not_equal(Self, Self) -> Bool
+pub fn ContentPage::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Document {
+  pages : Array[ContentPage]
+  sections : Array[SectionSpan]
+}
 
 pub(all) enum Duplex {
   LongEdge
@@ -105,6 +122,19 @@ pub(all) struct Rect {
 pub fn Rect::equal(Self, Self) -> Bool
 pub fn Rect::not_equal(Self, Self) -> Bool
 pub fn Rect::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Section {
+  source : String
+  source_pages : Int
+  selection : String
+  start_on_recto : Bool
+}
+
+pub(all) struct SectionSpan {
+  source : String
+  first : Int
+  count : Int
+}
 
 pub(all) struct Sheet {
   signature : Int
