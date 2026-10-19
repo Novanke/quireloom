@@ -20,6 +20,12 @@ pub fn impose_document(Document, Array[Signature], Binding, Duplex) -> Result[Bo
 
 pub fn impose_with(Int, Int, Binding, Duplex) -> Result[Plan, PlanError]
 
+pub fn job_csv(PrintJob) -> Result[String, WorkflowError]
+
+pub fn job_manifest(PrintJob) -> Result[String, WorkflowError]
+
+pub fn job_spec_json(JobSpec) -> Result[String, WorkflowError]
+
 pub fn json_report(Plan) -> Result[String, PlanError]
 
 pub fn layout(Paper, Int) -> Result[Layout, PlanError]
