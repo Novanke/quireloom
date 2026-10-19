@@ -16,14 +16,7 @@ pub fn impose_with(
     Ok(p) => p
   }
   let sheets = canonical.sheets.map(fn(sheet) {
-    let front = if binding == Right { mirror(sheet.front) } else { sheet.front }
-    let back = if binding == Right { mirror(sheet.back) } else { sheet.back }
-    let back = if duplex == ShortEdge {
-      { left: back.right, right: back.left, rotation: 180, }
-    } else {
-      back
-    }
-    { signature: sheet.signature, depth: sheet.depth, front, back, }
+    oriented_sheet(sheet, binding, duplex)
   })
   Ok({ page_count: pages, signature_pages: maximum, binding, duplex, sheets, })
 }

@@ -14,6 +14,8 @@ pub fn explicit_gatherings(Int, Array[Int]) -> Result[Array[Signature], Workflow
 
 pub fn impose(Int, Int) -> Result[Plan, PlanError]
 
+pub fn impose_document(Document, Array[Signature], Binding, Duplex) -> Result[Booklet, WorkflowError]
+
 pub fn impose_with(Int, Int, Binding, Duplex) -> Result[Plan, PlanError]
 
 pub fn json_report(Plan) -> Result[String, PlanError]
@@ -25,6 +27,8 @@ pub fn parse_selection(String, Int) -> Result[Array[Slot], WorkflowError]
 pub fn plan_gatherings(Int, Int, SignaturePolicy) -> Result[Array[Signature], WorkflowError]
 
 pub fn recover(Plan) -> Result[Array[Slot], PlanError]
+
+pub fn recover_booklet(Booklet) -> Result[Array[ContentPage], WorkflowError]
 
 pub fn signatures(Int, Int) -> Result[Array[Signature], PlanError]
 
@@ -48,6 +52,14 @@ pub(all) enum Binding {
 pub fn Binding::equal(Self, Self) -> Bool
 pub fn Binding::not_equal(Self, Self) -> Bool
 pub fn Binding::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Booklet {
+  document : Document
+  gatherings : Array[Signature]
+  sheets : Array[Sheet]
+  binding : Binding
+  duplex : Duplex
+}
 
 pub(all) enum ContentPage {
   Source(String, Int)
