@@ -44,6 +44,8 @@ pub fn validate_gatherings(Int, Array[Signature]) -> Result[Unit, WorkflowError]
 
 pub fn verify(Plan) -> Result[Unit, PlanError]
 
+pub fn verify_schedule(Booklet, PrintSchedule) -> Result[Unit, WorkflowError]
+
 // Errors
 
 // Types and methods
